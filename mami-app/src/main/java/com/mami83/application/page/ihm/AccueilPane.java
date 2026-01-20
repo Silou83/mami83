@@ -9,6 +9,7 @@ import com.mami83.application.MamiApp;
 import com.mami83.application.MamiView;
 import com.mami83.application.composants.Icons;
 import com.mami83.application.composants.navigation.NavigationButton;
+import com.mami83.application.page.ihm.enfant.AccueilEnfantPane;
 import com.mami83.application.util.TaskExecutor;
 import net.miginfocom.swing.MigLayout;
 
@@ -175,8 +176,12 @@ public class AccueilPane extends JPanel {
     // ==================== ACTIONS DE NAVIGATION ====================
 
     private void afficherAccueilEnfant() {
-        loadModuleWithProgress("Module Enfants", "accueilEnfant", new Color(52, 152, 219), 
-                               "Enfants", Icons.childIcon());
+        MamiView view = MamiApp.getMamiView();
+        if (!view.showPanel("accueilEnfant")) {
+            AccueilEnfantPane aep = new AccueilEnfantPane();
+            view.addAndShow(aep, "accueilEnfant");
+        }
+        addNavigationButtonIfNeeded("accueilEnfant", "Enfants", Icons.childIcon(), "accueilEnfant");
     }
 
     private void afficherAccueilParent() {
